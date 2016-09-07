@@ -11,7 +11,7 @@ RUN (mv /etc/localtime /etc/localtime.org && \
 
 RUN (apt-get update && \
      DEBIAN_FRONTEND=noninteractive \
-     apt-get install -y ant xvfb build-essential software-properties-common \
+     apt-get install -y ant maven xvfb build-essential software-properties-common \
                         zlib1g-dev libssl-dev libreadline-dev libyaml-dev \
                         libxml2-dev libxslt-dev sqlite3 libsqlite3-dev \
                         vim git byobu wget curl unzip tree exuberant-ctags \
@@ -34,10 +34,12 @@ USER docker
 ENV HOME /home/docker
 WORKDIR /home/docker
 
+RUN curl -fsSL https://test.docker.com/ | sh
+
 #    git clone --recursive https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe && \
 
 # Checkout my vimrc
-RUN (git clone git://github.com/snowch/vimrc.git ~/.vim && \
+RUN (git clone git://github.com/darrellberry/vimrc.git ~/.vim && \
     mkdir ~/.vim/plugin && \
 #    ln -s ~/.vim/.vimrc ~/.vimrc && \
 #    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
