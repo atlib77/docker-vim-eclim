@@ -41,12 +41,15 @@ RUN curl -fsSL https://test.docker.com/ | sh
 # Checkout my vimrc
 RUN (git clone git://github.com/darrellberry/vimrc.git ~/.vim && \
     mkdir ~/.vim/plugin && \
-#    ln -s ~/.vim/.vimrc ~/.vimrc && \
-#    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
+    ln -s ~/.vim/.vimrc ~/.vimrc && \
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
     mkdir ~/.vim/colors && \
     curl -s https://raw.githubusercontent.com/endel/vim-github-colorscheme/master/colors/github.vim > ~/.vim/colors/github.vim && \
     curl -s http://www.vim.org/scripts/download_script.php?src_id=20938 > ~/.vim/plugin/colorsupport.vim && \
     ln -s ~/.vim/.tmux.conf ~/.tmux.conf)
+
+RUN (cd ~/.vim/bundle/YouCompleteMe && \
+     ./install.py)
 
 # Force tmux to use 256 colors to play nicely with vim
 RUN echo 'alias tmux="tmux -2"' >> ~/.profile
