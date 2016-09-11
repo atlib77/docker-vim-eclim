@@ -35,8 +35,8 @@ ENV HOME /home/docker
 WORKDIR /home/docker
 
 RUN curl -fsSL https://test.docker.com/ | sh
+RUN sudo usermod -aG docker docker
 
-#    git clone --recursive https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe && \
 
 # Checkout my vimrc
 RUN (git clone git://github.com/darrellberry/vimrc.git ~/.vim && \
@@ -48,13 +48,13 @@ RUN (git clone git://github.com/darrellberry/vimrc.git ~/.vim && \
     curl -s http://www.vim.org/scripts/download_script.php?src_id=20938 > ~/.vim/plugin/colorsupport.vim && \
     ln -s ~/.vim/.tmux.conf ~/.tmux.conf)
 
-RUN (cd ~/.vim/bundle/YouCompleteMe && \
-     ./install.py)
 
 # Force tmux to use 256 colors to play nicely with vim
 RUN echo 'alias tmux="tmux -2"' >> ~/.profile
 
 RUN vim -N +PluginInstall +qall 
+RUN (cd ~/.vim/bundle/YouCompleteMe && \
+     ./install.py)
 
 #RUN cd ~/.vim/bundle/YouCompleteMe; ./install.py --clang-completer
 
@@ -71,3 +71,4 @@ RUN (wget -O /home/docker/eclipse-jee-neon-R-linux-gtk-x86_64.tar.gz \
 USER root
 ADD service /etc/service
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN ln -s /home/docker/.m2 /root/.m2
