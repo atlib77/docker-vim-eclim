@@ -45,6 +45,7 @@ RUN (git clone git://github.com/darrellberry/vimrc.git ~/.vim && \
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
     mkdir ~/.vim/colors && \
     curl -s https://raw.githubusercontent.com/endel/vim-github-colorscheme/master/colors/github.vim > ~/.vim/colors/github.vim && \
+    curl -s https://raw.githubusercontent.com/morhetz/gruvbox/master/colors/gruvbox.vim > ~/.vim/colors/gruvbox.vim && \
     curl -s http://www.vim.org/scripts/download_script.php?src_id=20938 > ~/.vim/plugin/colorsupport.vim && \
     ln -s ~/.vim/.tmux.conf ~/.tmux.conf)
 
