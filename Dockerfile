@@ -54,6 +54,7 @@ RUN (git clone git://github.com/darrellberry/vimrc.git ~/.vim && \
 RUN echo 'alias tmux="tmux -2"' >> ~/.profile
 
 RUN vim -N +PluginInstall +qall 
+RUN vim -N +BundleInstall +qall 
 RUN (cd ~/.vim/bundle/YouCompleteMe && \
      ./install.py)
 
